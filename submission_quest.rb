@@ -24,16 +24,16 @@ class Person < Cards
     return @name
   end
 
-  def calculate
+  def calculate　# 点数の計算
     # @point = @@hand.inject(0) {|sum, hash| sum + hash[:num]}
     @point = 0
     ace_count = 0
 
-  # まずは2から10までのカードを処理
+  
     @hand.each do |card|
-      if card[:num] >= 2 && card[:num] <= 9
+      if card[:num] >= 2 && card[:num] <= 9 # 2から9までの処理
         @point += card[:num]
-      elsif card[:num] >= 10 && card[:num] <= 13
+      elsif card[:num] >= 10 && card[:num] <= 13 # １０から１３までの処理
         @point += 10
       elsif card[:num] == 1 # Aの処理
         ace_count += 1
@@ -55,7 +55,7 @@ class Person < Cards
     return @point
   end
 
-  def draw_card()
+  def draw_card()　#　カードを引く
     select_suit = @@suits[rand(0..3)]
     count = @@deck[select_suit].length
     # select_num = @@deck[select_suit][rand(0..(count - 1))]
@@ -82,7 +82,7 @@ class Person < Cards
     end
   end
 
-  def add_card()
+  def add_card() # カードを追加
     case @name
     when 'あなた'
       answer = ""
@@ -116,15 +116,15 @@ class Game
   end
 
   def start
-    @cards.set_deck
+    @cards.set_deck # デッキをセット
 
-    @player.draw_card
+    @player.draw_card # カードを引く
     @player.draw_card
 
     @dealer.draw_card
     @dealer.draw_card
 
-    @player.add_card
+    @player.add_card # 追加のカード
     if @player.point > 21
       puts "あなたの得点が21を超えました。あなたの負けです。"
       return
@@ -135,7 +135,7 @@ class Game
       return
     end
 
-    self.judge(@player.point, @dealer.point)
+    self.judge(@player.point, @dealer.point)　# 勝利判定
   end
 
   def judge(point1, point2)
