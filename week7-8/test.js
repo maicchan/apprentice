@@ -145,3 +145,99 @@
 // }
 
 // obj.method();
+
+// class Playlist {
+//   constructor(name) {
+//     this.name = name;
+//     this.songs = [];
+//   }
+
+//   addSong(song) {
+//     this.songs.push(song);
+//   }
+
+//   removeSong(song) {
+//     const index = this.songs.indexOf(song);
+//     if (index !== -1) {
+//       this.songs.splice(index, 1);
+//     }
+//   }
+
+//   play() {
+//     if (this.songs.length === 0) {
+//       console.log('プレイリストは空です。');
+//       return;
+//     }
+//     return `再生中: ${this.songs[0]}`;
+//   }
+// }
+
+// let myPlaylist = new Playlist('お気に入りリスト');
+// myPlaylist.addSong('Lemon');
+// myPlaylist.addSong('花束');
+// console.log(myPlaylist.play()); // 再生中: Lemon
+// myPlaylist.removeSong('Lemon');
+// console.log(myPlaylist.play()); // 再生中：花束
+
+// function checkDivisibleByFive(num) {
+//   if (num % 5 === 0) {
+//     return true;
+//   } else {
+//     throw new Error('数値は5で割り切れません');
+//   }
+// }
+
+// try {
+//   console.log(checkDivisibleByFive(10));
+//   console.log(checkDivisibleByFive(7));
+// } catch (e) {
+//   console.log(e.message);
+// }
+
+// function asyncSort(numbers) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       try {
+//         const sortedNumbers = numbers.sort((a, b) => a - b);
+//         resolve(sortedNumbers);
+//       } catch (error) {
+//         reject(error);
+//       }
+//     }, 2000);
+//   });
+// }
+
+// const numbers = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+// asyncSort(numbers).then((sortedNumbers) => {
+//   console.log(sortedNumbers);
+// }).catch((error) => {
+//   console.error(`Error: ${error}`);
+// });
+
+// console.log('同期処理');
+
+function asyncSort(numbers) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        const sortedNumbers = numbers.sort((a, b) => a - b);
+        resolve(sortedNumbers);
+      } catch (error) {
+        reject(error);
+      }
+    }, 2000);
+  });
+}
+
+async function sortNumbers() {
+  try {
+    const numbers = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+    const sortedNumbers = await asyncSort(numbers);
+    console.log(sortedNumbers);
+  } catch (error) {
+    console.error(`Error: ${error}`);
+  }
+}
+
+sortNumbers();
+console.log('同期処理');
