@@ -12,7 +12,7 @@ class TodosController < ApplicationController
     if @todo.save
       redirect_to :root
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
